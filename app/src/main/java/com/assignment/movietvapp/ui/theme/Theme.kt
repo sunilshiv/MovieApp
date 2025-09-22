@@ -1,4 +1,4 @@
-package com.assignment.movietvapp.theme
+package com.assignment.movietvapp.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
