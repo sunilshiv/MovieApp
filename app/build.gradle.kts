@@ -13,12 +13,12 @@ plugins {
 
 android {
     namespace = "com.assigment.movietvapp"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.assigment.movietvapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -94,6 +94,12 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+
+    //Room database
+    implementation(libs.androidx.room.common.jvm)
+    implementation(libs.androidx.room.runtime.android)
+    ksp(libs.androidx.room.compiler)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
