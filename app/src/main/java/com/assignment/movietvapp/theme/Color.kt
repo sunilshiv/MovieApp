@@ -1,4 +1,4 @@
-package com.assigment.movietvapp.ui.theme
+package com.assignment.movietvapp.theme
 
 import androidx.compose.ui.graphics.Color
 

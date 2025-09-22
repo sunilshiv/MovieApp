@@ -12,11 +12,11 @@ plugins {
 }
 
 android {
-    namespace = "com.assigment.movietvapp"
+    namespace = "com.assignment.movietvapp"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.assigment.movietvapp"
+        applicationId = "com.assignment.movietvapp"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -87,6 +87,10 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     ksp(libs.hilt.android.compiler)
 
     // Paging Compose
@@ -99,6 +103,11 @@ dependencies {
     implementation(libs.androidx.room.common.jvm)
     implementation(libs.androidx.room.runtime.android)
     ksp(libs.androidx.room.compiler)
+
+    // Retrofit + OkHttp
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
 
     testImplementation(libs.junit)

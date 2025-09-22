@@ -1,4 +1,4 @@
-package com.assigment.movietvapp
+package com.assignment.movietvapp
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.assigment.movietvapp.ui.theme
+package com.assignment.movietvapp.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

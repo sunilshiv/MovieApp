@@ -1,4 +1,4 @@
-package com.assigment.movietvapp.data.local
+package com.assignment.movietvapp.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
