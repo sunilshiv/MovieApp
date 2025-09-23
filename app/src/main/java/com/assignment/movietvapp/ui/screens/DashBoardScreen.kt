@@ -122,7 +122,7 @@ fun MovieHomeScreen(navController: NavHostController) {
     Log.e("TAG_networkResult", "MovieHomeScreen: $networkResult")
     Scaffold(topBar = {
         SimpleLightTopAppBar(
-            "Movie TVCompose",
+            "Movie Trailers APP",
             { navController.navigate(MovieAppScreen.MOVIE_SEARCH.route) },
             { navController.navigate(MovieAppScreen.MOVIE_WATCHLIST.route) }
         )

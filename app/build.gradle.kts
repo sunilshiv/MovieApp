@@ -109,6 +109,13 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
+    implementation("androidx.tv:tv-material:1.0.0")
+    implementation("androidx.leanback:leanback:1.0.0")
+    implementation("io.github.ajaydhattarwal:youtube-extractor-android:1.0.2")
+    implementation("androidx.media3:media3-exoplayer-hls:1.7.1")
+    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.media3:media3-ui:1.3.1")
+
     //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

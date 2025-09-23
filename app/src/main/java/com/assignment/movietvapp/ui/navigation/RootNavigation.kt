@@ -7,7 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.assignment.movietvapp.ui.screens.GenreWiseMoviesScreen
+import com.assignment.movietvapp.ui.screens.MovieDetailsScreen
 import com.assignment.movietvapp.ui.screens.MovieHomeScreen
+import com.assignment.movietvapp.ui.screens.PlayerScreen
+import com.assignment.movietvapp.ui.screens.SavedMovieScreen
+import com.assignment.movietvapp.ui.screens.SearchScreen
+import com.assignment.movietvapp.ui.screens.SeeAllScreen
 import com.assignment.movietvapp.ui.screens.SplashScreen
 
 @Composable
@@ -17,6 +23,7 @@ fun RootNavigation() {
     val SeeAllTags = "seeAllTags"
     val genreId = "genId"
     val genreName = "genName"
+    val exoPlay = "exoPlay"
     NavHost(
         navController = navController,
         route = Graph.ROOT,
@@ -29,7 +36,7 @@ fun RootNavigation() {
         composable(route = MovieAppScreen.MOVIE_HOME.route) {
             MovieHomeScreen(navController = navController)
         }
-       /* composable(
+        composable(
             route = MovieAppScreen.MOVIE_HOME_DETAILS.route + "/{$MOVIE_ID_ARG}",
             arguments = listOf(navArgument(MOVIE_ID_ARG) { type = NavType.StringType })
         ) {
@@ -43,6 +50,14 @@ fun RootNavigation() {
         ) {
             Log.e("TAG_PASSED_KEY_all", "RootNavigation: " + it.arguments?.getString(SeeAllTags))
             SeeAllScreen(it.arguments?.getString(SeeAllTags) ?: "1", navController)
+        }
+
+        composable(
+            route = MovieAppScreen.PLAYER_SCREEN.route + "/{${exoPlay}}",
+            arguments = listOf(navArgument(exoPlay) { type = NavType.StringType })
+        ) {
+            Log.e("TAG_PASSED_KEY_all", "RootNavigation: " + it.arguments?.getString(SeeAllTags))
+            PlayerScreen(it.arguments?.getString(exoPlay) ?: "1", navController)
         }
 
         composable(
@@ -64,7 +79,7 @@ fun RootNavigation() {
         }
         composable(route = MovieAppScreen.MOVIE_WATCHLIST.route) {
             SavedMovieScreen(navController = navController)
-        }*/
+        }
 
     }
 }
@@ -83,4 +98,6 @@ sealed class MovieAppScreen(val route: String) {
     object MOVIE_SEARCH : MovieAppScreen(route = "search")
     object MOVIE_ABOUT : MovieAppScreen(route = "about")
     object MOVIE_WATCHLIST : MovieAppScreen(route = "watch")
+
+    object PLAYER_SCREEN : MovieAppScreen(route = "player")
 }
