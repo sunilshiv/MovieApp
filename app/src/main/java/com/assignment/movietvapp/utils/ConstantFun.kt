@@ -77,7 +77,7 @@ fun SimpleLightTopAppBar(
         title = {
             Text(
                 title, style = MaterialTheme.typography.titleMedium, fontFamily = netflixFamily,
-                color = colorResource(id = R.color.black),
+                color = colorResource(id = R.color.white),
                 fontWeight = FontWeight.Medium,
             )
         },
