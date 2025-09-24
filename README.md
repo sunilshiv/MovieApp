@@ -13,7 +13,8 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 - 🖼️ **Coil** – Lightweight and fast image loading library  
 - 🧭 **Navigation Compose** – Intuitive and seamless in-app navigation
 
-- ### 📸 Features
+ 
+ ### 📸 Features
 
 - 🎞️ **Home Screen** – Browse latest movies, genres, and featured banners  
 - 🔍 **Search** – Quickly find movies by title  
