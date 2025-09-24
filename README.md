@@ -27,7 +27,14 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 - ⚡ **Infinite Scrolling** – Smooth pagination powered by Paging 3  
 - 🎨 **Modern UI** – Built with Jetpack Compose for responsive design
 
-###  📷 Screenshots
-| Home Screen | Detail with Cast | Trailer Player | Watchlist | 
+###  📷 Screenshots and Video
+## 📸 Screenshots
 
-|-------------|----------------------------------|---------------|----------------|-----------| |
+_Add screenshots here once the app runs_
+
+| Add Expense | View Expense | Expense Report | Videos |
+|--------------|-------------|----------------|--------|
+| ![List](docs/01_Dashboard.png) | ![Entry](docs/02_now_playing.png) | ![Report](docs/03_details_screen.png) | ![Videos](docs/XRecorder_20250924_02.mp4) |
+
+---
+
