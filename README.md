@@ -32,7 +32,7 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 
 _Add screenshots here once the app runs_
 
-| Add Expense | View Expense | Expense Report | Videos |
+| Home | Now Playing | Details | Videos |
 |--------------|-------------|----------------|--------|
 | ![List](docs/01_Dashboard.png) | ![Entry](docs/02_now_playing.png) | ![Report](docs/03_details_screen.png) | ![Videos](docs/XRecorder_20250924_02.mp4) |
 
