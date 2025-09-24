@@ -14,7 +14,7 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 - 🧭 **Navigation Compose** – Intuitive and seamless in-app navigation
 
  
- ### 📸 Features
+ ### 🚀 Features
 
 - 🎞️ **Home Screen** – Browse latest movies, genres, and featured banners  
 - 🔍 **Search** – Quickly find movies by title  
@@ -27,5 +27,7 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 - ⚡ **Infinite Scrolling** – Smooth pagination powered by Paging 3  
 - 🎨 **Modern UI** – Built with Jetpack Compose for responsive design
 
-  📷 Screenshots
-| Home Screen | Detail with Cast | Trailer Player | Watchlist | |-------------|----------------------------------|---------------|----------------|-----------| |
+###  📷 Screenshots
+| Home Screen | Detail with Cast | Trailer Player | Watchlist | 
+
+|-------------|----------------------------------|---------------|----------------|-----------| |
