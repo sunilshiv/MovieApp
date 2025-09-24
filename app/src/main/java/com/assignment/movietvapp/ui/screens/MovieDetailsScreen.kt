@@ -2,9 +2,7 @@ package com.assignment.movietvapp.ui.screens
 
 import android.annotation.SuppressLint
 import android.util.Log
-import android.view.WindowManager
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -26,15 +24,12 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BookmarkBorder
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -52,7 +47,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -61,18 +55,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.datasource.DefaultHttpDataSource
@@ -86,7 +75,6 @@ import androidx.media3.ui.PlayerView
 //import androidx.media3.exoplayer.hls.HlsMediaSource
 //import androidx.media3.ui.PlayerView
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
 import coil.compose.rememberAsyncImagePainter
 
 import com.ar.youtubeextractor.core.YouTubeExtractor
@@ -107,14 +95,12 @@ import com.assignment.movietvapp.utils.Constants.Companion.BASE_POSTER_IMAGE_URL
 import com.assignment.movietvapp.utils.MovieState
 import com.assignment.movietvapp.utils.ShowError
 import com.assignment.movietvapp.utils.netflixFamily
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 //import com.ar.youtubeextractor.core.YouTubeExtractor
 //import com.ar.youtubeextractor.core.onError
 //import com.ar.youtubeextractor.core.onSuccess
 import java.text.SimpleDateFormat
 import java.util.Date
-import androidx.media3.common.Player
+import kotlin.collections.get
 
 @Composable
 fun MovieDetailsScreen(navController: NavHostController, movieId: String) {
@@ -696,104 +682,55 @@ fun TrailerPlayerScreen(youtubeKey: String) {
             .build()
 
 
+
         // Create a data source factory.
         val dataSourceFactory: DefaultHttpDataSource.Factory = DefaultHttpDataSource.Factory()
 // Create a HLS media source pointing to a playlist uri.
         val hlsMediaSource =
-            HlsMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(MediaItem.fromUri(videoUrl!!))
+            HlsMediaSource.Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(videoUrl!!))
 // Create a player instance.
-        val encodedUrl = URLEncoder.encode(videoUrl, StandardCharsets.UTF_8.toString())
-        val mediaVideoItem = MediaItem.Builder()
-            .setUri(encodedUrl)
-            /*  .setMimeType(
-                  if (videoUrl.toMediaType().type == "HLS") MimeTypes.APPLICATION_M3U8
-                  else MimeTypes.APPLICATION_MPD
-              )*/
-            .build()
-        var isBuffering by remember { mutableStateOf(true) }
-        val exoPlayer = remember {
+
+        val exoplayer = remember {
             ExoPlayer.Builder(context).build().apply {
                 setMediaItem(mediaItem)
-                addListener(object : Player.Listener {
-                    override fun onPlaybackStateChanged(playbackState: Int) {
-                        isBuffering = playbackState == Player.STATE_BUFFERING
-                    }
-                })
                 prepare()
                 playWhenReady = true
             }
         }
-        val lifecycleOwner = LocalLifecycleOwner.current
-        DisposableEffect(lifecycleOwner) {
-            val observer = LifecycleEventObserver { _, event ->
-                when (event) {
-                    Lifecycle.Event.ON_RESUME -> exoPlayer.play()
-                    Lifecycle.Event.ON_PAUSE -> exoPlayer.pause()
-                    else -> {}
-                }
-            }
-            lifecycleOwner.lifecycle.addObserver(observer)
+        DisposableEffect(Unit) { onDispose { exoplayer.release() } }
 
-            // Keep screen on
-            val window = (context as? ComponentActivity)?.window
-            window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        BackHandler {
 
-            onDispose {
-                lifecycleOwner.lifecycle.removeObserver(observer)
-                exoPlayer.release()
-                window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-            }
+            exoplayer.stop()
+            exoplayer.release()
+            //onBack()
         }
 
 
-        // exoplayer.setMediaSource(hlsMediaSource)
+
+        exoplayer.setMediaSource(hlsMediaSource)
 
 
-        Box(modifier = Modifier.fillMaxSize()) {
-            AndroidView(
-                modifier = Modifier.fillMaxSize(),
-                factory = { PlayerView(it).apply { player = exoPlayer } }
-            )
+        //  exoplayer.prepare()
+        Box(Modifier.fillMaxSize()) {
+            AndroidView(factory = { PlayerView(it).apply { player = exoplayer
 
-            // Custom UI overlay
-            Box(modifier = Modifier.fillMaxSize()) {
-                // Top controls (Back and PiP buttons)
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.TopCenter)
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                   /* IconButton(onClick = onBack) {
-                        Icon(
-                            Icons.Default.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
-                        )
-                    }*/
-
-                   /* // Show PiP button only if supported
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        IconButton(onClick = { enterPiPMode() }) {
-                            Icon(
-                                Icons.Default.PlayArrow,
-                                contentDescription = "Picture-in-Picture",
-                                tint = Color.White
-                            )
-                        }
-                    }*/
-                }
             }
+            } ,
+                modifier = Modifier.fillMaxSize()
+                    .aspectRatio(16 / 9f))
 
-            if (isBuffering) {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center),
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
+            // Title overlay
+//            Text(
+//                text = videoTitle?: "KID",
+//                color = Color.White,
+//                style = MaterialTheme.typography.titleLarge,
+//                modifier = Modifier
+//                    .align(Alignment.TopStart)
+//                    .padding(16.dp)
+//                    .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(4.dp))
+//                    .padding(horizontal = 8.dp, vertical = 4.dp)
+//            )
         }
     }
 }

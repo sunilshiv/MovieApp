@@ -52,13 +52,13 @@ fun RootNavigation() {
             SeeAllScreen(it.arguments?.getString(SeeAllTags) ?: "1", navController)
         }
 
-        composable(
+     /*   composable(
             route = MovieAppScreen.PLAYER_SCREEN.route + "/{${exoPlay}}",
             arguments = listOf(navArgument(exoPlay) { type = NavType.StringType })
         ) {
             Log.e("TAG_PASSED_KEY_all", "RootNavigation: " + it.arguments?.getString(SeeAllTags))
             PlayerScreen(it.arguments?.getString(exoPlay) ?: "1", navController)
-        }
+        }*/
 
         composable(
             route = MovieAppScreen.MOVIE_GENRE_WISE.route + "/{$genreId}" + "/{$genreName}",
