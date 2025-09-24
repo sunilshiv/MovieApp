@@ -25,4 +25,7 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
   - ▶️ Watch official trailers with ExoPlayer  
 - ❤️ **Watchlist** – Add or remove movies using Room Database  
 - ⚡ **Infinite Scrolling** – Smooth pagination powered by Paging 3  
-- 🎨 **Modern UI** – Built with Jetpack Compose for responsive design  
+- 🎨 **Modern UI** – Built with Jetpack Compose for responsive design
+
+  📷 Screenshots
+| Home Screen | Detail with Cast | Trailer Player | Watchlist | |-------------|----------------------------------|---------------|----------------|-----------| |
