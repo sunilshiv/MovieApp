@@ -28,9 +28,6 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 - 🎨 **Modern UI** – Built with Jetpack Compose for responsive design
 
 ###  📷 Screenshots and Video
-## 📸 Screenshots
-
-_Screenshots of app_
 
 | Home | Now Playing | Details | Videos |
 |--------------|-------------|----------------|--------|
