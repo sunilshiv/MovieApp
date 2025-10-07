@@ -30,7 +30,7 @@ A modern Android app leveraging TMDB API to browse movies, view details, watch t
 ###  📷 Screenshots and Video
 ## 📸 Screenshots
 
-_Add screenshots here once the app runs_
+_Screenshots of app_
 
 | Home | Now Playing | Details | Videos |
 |--------------|-------------|----------------|--------|
